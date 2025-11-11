@@ -20,8 +20,8 @@ class MercadoLibreController extends Controller
 
         $data = $response->json();
 
-        Session::put('mercadolibre_access_token', $data['access_token']);
-        Session::put('mercadolibre_refresh_token', $data['refresh_token']);
+        Session::put('meli_access_token', $data['access_token']);
+        Session::put('meli_refresh_token', $data['refresh_token']);
 
         return $data;
     }
@@ -48,16 +48,20 @@ class MercadoLibreController extends Controller
         ]);
         $data = $response->json();
 
+        dd(
+            $data
+        );
+
         // save tokens in sessions o db
-        if (isset($data['access_token'])) {
-            Session::put('meli_access_token', $data['access_token']);
-            Session::put('meli_refresh_token', $data['refresh_token']);
-            Session::put('meli_user_id', $data['user_id']);
-        } else {
-            dd(
-                'Whoops!'
-            );
-        }
+        // if (isset($data['access_token'])) {
+        //     Session::put('meli_access_token', $data['access_token']);
+        //     Session::put('meli_refresh_token', $data['refresh_token']);
+        //     Session::put('meli_user_id', $data['user_id']);
+        // } else {
+        //     dd(
+        //         'Whoops!'
+        //     );
+        // }
 
 
         redirect()->route('mercadolibre.account');
