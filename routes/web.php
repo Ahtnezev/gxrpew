@@ -1,14 +1,13 @@
 <?php
 
-use App\Http\Controllers\MercadoLibreAuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MercadoLibreController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/auth/mercadolibre', [MercadoLibreAuthController::class, 'redirect'])
-    ->name('mercadolibre.auth');
+Route::get('/mercadolibre/callback', [MercadoLibreController::class, 'callback'])->name('mercadolibre.callback');
+Route::get('/mercadolibre/login', [MercadoLibreController::class, 'redirectToAuth'])->name('mercadolibre.login');
+Route::get('/mercadolibre/account', [MercadoLibreController::class, 'account'])->name('mercadolibre.account');
 
-Route::get('/auth/mercadolibre/callback', [MercadoLibreAuthController::class, 'callback'])
-    ->name('mercadolibre.callback');
