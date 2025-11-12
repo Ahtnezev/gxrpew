@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Hubo un error </h2>
+    <h2>No se pudo concretar la compra</h2>
 @stop

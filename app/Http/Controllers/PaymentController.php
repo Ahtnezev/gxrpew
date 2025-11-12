@@ -74,7 +74,7 @@ class PaymentController extends Controller
             ],
             'payer' => [
                 'name' => 'Anya Forger',
-                'email' => 'anyaforger@example.com',
+                'email' => 'test_user_9084681330361817150@testuser.com',
             ],
             'back_urls' => [
                 'success' => route('checkout.success'),
