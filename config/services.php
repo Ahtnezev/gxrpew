@@ -35,10 +35,10 @@ return [
         ],
     ],
 
-    'mercadolibre' => [
-        'client_id' => env('MERCADOLIBRE_APP_ID'),
-        'client_secret' => env('MERCADOLIBRE_CLIENT_SECRET'),
-        'redirect' => env('MERCADOLIBRE_REDIRECT_URI')
+    'mp' => [
+        'access_token' => env('MP_ACCESS_TOKEN'),
+        'public_key' => env('MP_PUBLIC_KEY'),
+        'redirect' => env('MP_REDIRECT_URI')
     ]
 
 ];
