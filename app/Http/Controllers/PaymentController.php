@@ -97,6 +97,7 @@ class PaymentController extends Controller
             ]);
         }
 
-        return redirect($preference->init_point);
+        // return redirect($preference->init_point);
+        return response()->json(['preference_id' => $preference->id]);
     }
 }
