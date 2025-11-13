@@ -48,6 +48,11 @@ class PaymentController extends Controller
         return view('checkout.failure');
     }
 
+    // Número: 4235647728025682
+    // Titular: APRO
+    // Fecha: 11/25
+    // CVV: 123
+
     public function createPreference()
     {
         $client = new PreferenceClient();
@@ -82,7 +87,7 @@ class PaymentController extends Controller
                 'pending' => route('checkout.pending'),
             ],
             'auto_return' => 'approved',
-            //~ 'notification_url'
+            'notification_url' => config('services.mp.notifications')
         ]);
 
         }

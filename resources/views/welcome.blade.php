@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>MP-API</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -15,11 +15,16 @@
                 margin: 0;
                 padding: 0;
             }
-            .vmp {
+            body {
+                background-color: #292929;
+                color: #e9e9e9;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 height: 100vh;
+            }
+            .vmp {
+
             }
         </style>
 
@@ -31,15 +36,10 @@
     </head>
     <body>
         <div class="vmp">
-            <!-- Container para o botão de pagamento -->
             <div id="walletBrick_container"></div>
         </div>
 
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
-
-        <script src="https://sdk.mercadopago.com/js/v2"></script>
+        {{-- <script src="https://sdk.mercadopago.com/js/v2"></script>
         <script>
             // Configure sua chave pública do Mercado Pago
             const mp = new MercadoPago("{{ env("MP_PUBLIC_KEY") }}", {
@@ -62,6 +62,6 @@
                     },
                 });
             };
-        </script>
+        </script> --}}
     </body>
 </html>

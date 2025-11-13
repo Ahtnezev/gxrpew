@@ -38,7 +38,8 @@ return [
     'mp' => [
         'access_token' => env('MP_ACCESS_TOKEN'),
         'public_key' => env('MP_PUBLIC_KEY'),
-        'redirect' => env('MP_REDIRECT_URI')
+        'redirect' => env('MP_REDIRECT_URI'),
+        'notifications' => env('MP_NOTIFICATION_URI')
     ]
 
 ];
