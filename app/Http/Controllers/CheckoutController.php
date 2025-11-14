@@ -14,14 +14,12 @@ class CheckoutController extends Controller
     //     $this->mps = $mps;
     // }
 
-    public function createPreference(MercadoPagoService $mps, $productId) {
-        $product = Product::findOrFail($productId);
+    public function createPreference(MercadoPagoService $mp, $id) {
+        $product = Product::findOrFail($id);
 
-        $preference = $mps->createPreference($product);
-
-        return response()->json([
-            'id'=> $preference->id
-        ]);
+        return response()->json(
+            $mp->createPreference($product)
+        );
     }
 
     // public function create(Product $product)
