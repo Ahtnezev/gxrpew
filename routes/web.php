@@ -33,8 +33,10 @@ Route::prefix('mercadopago')->group(function() {
     Route::get('/callback', [PaymentController::class, 'callback'])->name('mp.callback');
 
     Route::prefix('checkout')->group(function() {
-        Route::get('/', [PaymentController::class, 'createPreference'])->name('checkout.create');
+        // Route::get('/', [PaymentController::class, 'createPreference'])->name('checkout.create');
         // Route::get('/', [CheckoutController::class, 'create'])->name('checkout.create');
+
+        Route::post('/preference/{id}', [CheckoutController::class, 'createPreference'])->name('checkout.preference');
 
         Route::get('/success', [PaymentController::class, 'success'])->name('checkout.success');
         Route::get('/failure', [PaymentController::class, 'failure'])->name('checkout.failure');
@@ -43,8 +45,4 @@ Route::prefix('mercadopago')->group(function() {
 });
 
 
-
-// Route::resource('products', ProductController::class);
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::post('/checkout/create/{product}', [CheckoutController::class, 'create'])->name('checkout.create');
-

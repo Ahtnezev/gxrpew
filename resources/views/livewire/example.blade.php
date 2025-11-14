@@ -1,3 +1,0 @@
-<div>
-    Example: {{ $title }}
-</div>
