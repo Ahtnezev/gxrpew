@@ -8,21 +8,24 @@ use App\Livewire\Checkout;
 //* #2
 Route::get('/', App\Livewire\ProductList::class)->name('products.index');
 
+
 Route::get('/cart', function () {
     return view('cart');
 })->name('cart.index');
 
-Route::post('/checkout/cart', Checkout::class)->name('checkout.cart');
 
-// Rutas simples para "comprar ahora"
+Route::get('/checkout/cart', Checkout::class)->name('checkout.cart');
+
+
 Route::get('/checkout/{product}', function(\App\Models\Product $product){
     return view('checkout-product', compact('product'));
 })->name('checkout.show');
 
-// Payment result pages (simple)
+
 Route::get('/payment/success', function() { return view('payments.success'); })->name('payment.success');
 Route::get('/payment/failure', function() { return view('payments.failure'); })->name('payment.failure');
 Route::get('/payment/pending', function() { return view('payments.pending'); })->name('payment.pending');
+
 
 // Webhook (POST)
 Route::post('/webhook/mercadopago', [MercadoPagoWebhookController::class, 'handle'])->name('webhook.mercadopago');

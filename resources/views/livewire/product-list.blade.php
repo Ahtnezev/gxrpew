@@ -1,5 +1,7 @@
 <div>
-    <div class="grid grid-cols-3 gap-4">
+    <a  href="{{ route('cart.index') }}" class="btn btn-success">Carrito</a>
+
+    <div class="mt-4">
     @foreach($products as $product)
         <div class="p-4 border rounded">
             <h3 class="font-bold">{{ $product->name }}</h3>

@@ -18,7 +18,7 @@
 <body class="">
     @include('components.navbar')
 
-    <main class="container mx-auto py-4">
+    <main class="container mx-auto py-4" style="height:calc(100vh - 50px);">
         @yield('content')
         @isset($slot)
             {{ $slot }}
