@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\MercadoPagoWebhookController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MercadoLibreWebhookController;
 
-Route::post('/webhooks/test/mercadopago', [MercadoLibreWebhookController::class, 'handle'])->name('webhooks.mercadolibre');
+Route::post('/webhooks/test/mercadopago', [MercadoPagoWebhookController::class, 'handle'])->name('webhooks.mercadolibre');
 
 // Route::prefix('/webhooks/test/mercadopago')->group(function () {
 //     Route::post('/orders', [MercadoLibreWebhookController::class, 'handleOrders']);

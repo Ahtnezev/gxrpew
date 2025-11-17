@@ -20,6 +20,9 @@
 
     <main class="container mx-auto py-4">
         @yield('content')
+        @isset($slot)
+            {{ $slot }}
+        @endisset
     </main>
 
     @include('components.footer')

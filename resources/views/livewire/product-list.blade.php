@@ -1,4 +1,20 @@
 <div>
+    <div class="grid grid-cols-3 gap-4">
+    @foreach($products as $product)
+        <div class="p-4 border rounded">
+            <h3 class="font-bold">{{ $product->name }}</h3>
+            <p>${{ number_format($product->price, 2) }}</p>
+            <button wire:click="addToCart({{ $product->id }})" class="mt-2 btn btn-warning">Agregar</button>
+            <a href="{{ route('checkout.show', $product) }}" class="mt-2 btn btn-secondary">Ver</a>
+        </div>
+    @endforeach
+    </div>
+
+    {{ $products->links() }}
+</div>
+
+
+{{-- <div>
     <h2 class="text-xl font-bold mb-4">Productos</h2>
 
     @foreach($products as $product)
@@ -45,4 +61,4 @@ document.addEventListener('livewire:init', () => {
 
     });
 });
-</script>
+</script> --}}
