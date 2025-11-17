@@ -28,7 +28,7 @@ Route::get('/payment/pending', function() { return view('payments.pending'); })-
 
 
 // Webhook (POST)
-Route::post('/webhook/mercadopago', [MercadoPagoWebhookController::class, 'handle'])->name('webhook.mercadopago');
+Route::post('/webhooks/test/mercadopago', [MercadoPagoWebhookController::class, 'handle'])->name('webhook.mercadopago');
 
 
 //* #1

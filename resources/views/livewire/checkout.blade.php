@@ -18,7 +18,7 @@
     @if($initPoint)
         <div class="mt-3">
             <a href="{{ $initPoint }}" target="_blank" class="px-4 py-2 bg-green-600 text-white rounded inline-block">Ir al pago</a>
-            <p class="text-sm mt-2">Si el pago se completa, Mercado Pago nos notificará por webhook y actualizaremos la orden.</p>
+            <p class="text-sm mt-2">Si el pago se completa, MP notificará por webhook y actualizamos la orden.</p>
         </div>
     @endif
 </div>

@@ -74,7 +74,7 @@ class MercadoPagoWebhookController extends Controller
 
         if ($paymentStatus === 'approved') {
             $order->update(['status' => 'paid']);
-            // aquí puedes crear lógica para marcar stock, enviar mail, crear factura, etc.
+            // crear lógica para marcar stock, enviar mail, crear factura, etc.
         } elseif ($paymentStatus === 'pending') {
             $order->update(['status' => 'pending']);
         } else {
