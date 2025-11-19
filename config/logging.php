@@ -52,6 +52,14 @@ return [
 
     'channels' => [
 
+        // mercadopago
+        'mp' => [
+            'driver' => 'single',
+            'days' => env('LOG_DAILY_DAYS', 30),
+            'path' => storage_path('logs/mercadopago.log'),
+            'level' => 'debug',
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => explode(',', (string) env('LOG_STACK', 'single')),

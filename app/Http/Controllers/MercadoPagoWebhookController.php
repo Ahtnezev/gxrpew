@@ -16,7 +16,7 @@ class MercadoPagoWebhookController extends Controller
         // 2) Consultar la API de MP para obtener estado real del pago
         // 3) Actualizar la orden según external_reference o preference_id
 
-        Log::info('MP webhook payload: ' . json_encode($request->all()));
+        Log::channel('mp')->info('MP webhook payload: ' . json_encode($request->all()));
 
         // Try to find payment id
         // $mpId = $request->input('id') ?? $request->input('data.id') ?? $request->input('data')['id'] ?? null;
