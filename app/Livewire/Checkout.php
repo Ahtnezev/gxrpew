@@ -21,13 +21,13 @@ class Checkout extends Component
     {
         $sessionKey = session('cart_session_key');
         $this->cart = $sessionKey ? Cart::with('items.product')->where('session_key', $sessionKey)->first() : null;
-        if (!$this->cart || !$this->cart->items->count())
-        // {
+        if (!$this->cart || !$this->cart->items->count()) {
             abort(404, 'Carrito vacío');
-        //     $this->canBuy = false;
-        // } else {
-        //     $this->canBuy = true;
-        // }
+        }
+    }
+
+    public function updatedInitPoint() {
+
     }
 
     public function createOrderAndPreference()
@@ -79,9 +79,8 @@ class Checkout extends Component
         $order->update(['mp_preference_id' => $preference->id]);
         $this->order = $order;
         $this->initPoint = $preference->init_point;
-        Log::channel('mp')->info('initPoint value: ', [
-            $this->initPoint
-        ]);
+
+        Log::channel('mp')->info('initPoint value: ', [$this->initPoint]);
 
         // optional:we need to empty the cart
         // $this->cart->items()->delete();
@@ -97,10 +96,11 @@ class Checkout extends Component
 
     public function render()
     {
-        return view('livewire.checkout', [
-            'cart' => $this->cart,
-            'order' => $this->order,
-            'initPoint' => $this->initPoint
-        ]);
+        return view("livewire.checkout");
+        // return view('livewire.checkout', [
+        //     'cart' => $this->cart,
+        //     'order' => $this->order,
+        //     'initPoint' => $this->initPoint
+        // ]);
     }
 }
