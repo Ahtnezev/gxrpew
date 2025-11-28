@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\MercadoPagoConfig;
@@ -16,25 +17,17 @@ class Checkout extends Component
     public $order;
     public bool $canBuy = false;
 
-    public function render()
-    {
-        return view('livewire.checkout', [
-            'cart' => $this->cart,
-            'order' => $this->order,
-            'initPoint' => $this->initPoint
-        ]);
-    }
-
     public function mount()
     {
         $sessionKey = session('cart_session_key');
         $this->cart = $sessionKey ? Cart::with('items.product')->where('session_key', $sessionKey)->first() : null;
-        if (!$this->cart || !$this->cart->items->count()) {
-            // abort(404, 'Carrito vacío');
-            $this->canBuy = false;
-        } else {
-            $this->canBuy = true;
-        }
+        if (!$this->cart || !$this->cart->items->count())
+        // {
+            abort(404, 'Carrito vacío');
+        //     $this->canBuy = false;
+        // } else {
+        //     $this->canBuy = true;
+        // }
     }
 
     public function createOrderAndPreference()
@@ -86,6 +79,9 @@ class Checkout extends Component
         $order->update(['mp_preference_id' => $preference->id]);
         $this->order = $order;
         $this->initPoint = $preference->init_point;
+        Log::channel('mp')->info('initPoint value: ', [
+            $this->initPoint
+        ]);
 
         // optional:we need to empty the cart
         // $this->cart->items()->delete();
@@ -97,5 +93,14 @@ class Checkout extends Component
             return redirect()->away($this->initPoint);
         }
         $this->dispatch('notify', ['message' => 'No hay init_point']);
+    }
+
+    public function render()
+    {
+        return view('livewire.checkout', [
+            'cart' => $this->cart,
+            'order' => $this->order,
+            'initPoint' => $this->initPoint
+        ]);
     }
 }
