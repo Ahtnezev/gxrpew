@@ -14,6 +14,7 @@ class Checkout extends Component
     public $cart;
     public $initPoint;
     public $order;
+    public bool $canBuy = false;
 
     public function render()
     {
@@ -29,7 +30,10 @@ class Checkout extends Component
         $sessionKey = session('cart_session_key');
         $this->cart = $sessionKey ? Cart::with('items.product')->where('session_key', $sessionKey)->first() : null;
         if (!$this->cart || !$this->cart->items->count()) {
-            abort(404, 'Carrito vacío');
+            // abort(404, 'Carrito vacío');
+            $this->canBuy = false;
+        } else {
+            $this->canBuy = true;
         }
     }
 

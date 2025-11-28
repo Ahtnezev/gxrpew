@@ -11,11 +11,6 @@ class CartComponent extends Component
 
     protected $listeners = ['cartUpdated' => 'load'];
 
-    public function render()
-    {
-        return view('livewire.cart-component');
-    }
-
     public function mount() { $this->load(); }
 
     public function load() {
@@ -36,5 +31,10 @@ class CartComponent extends Component
             $item->update(['quantity' => (int)$qty]);
         }
         $this->load();
+    }
+
+    public function render()
+    {
+        return view('livewire.cart-component');
     }
 }

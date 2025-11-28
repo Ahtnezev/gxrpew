@@ -5,12 +5,6 @@
     <h1>{{ $product->name }}</h1>
     <p>${{ number_format($product->price,2) }}</p>
 
-    <a href="{{ route('checkout.cart') }}" class="btn btn-primary">Comprar ahora</a>
 
-    {{-- <form method="POST" action="{{ route('checkout.cart') }}">
-        @csrf
-        <input type="hidden" name="product_id" value="{{ $product->id }}">
-        <button type="submit" class="btn btn-primary">Comprar ahora</button>
-    </form> --}}
-
+    <livewire:add-to-cart-button :product="$product" :isRedirect="true">
 @endsection

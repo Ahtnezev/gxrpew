@@ -1,66 +1,27 @@
 <div>
     <a  href="{{ route('cart.index') }}" class="btn btn-success">Carrito</a>
 
-    <div class="mt-4">
-    @foreach($products as $product)
-        <div class="p-4 border rounded">
-            <h3 class="font-bold">{{ $product->name }}</h3>
-            <p>${{ number_format($product->price, 2) }}</p>
-            <button wire:click="addToCart({{ $product->id }})" class="mt-2 btn btn-warning">Agregar</button>
-            <a href="{{ route('checkout.show', $product) }}" class="mt-2 btn btn-secondary">Ver</a>
-        </div>
-    @endforeach
+    <div class="mt-4 container d-flex align-items-center justify-content-start flex-wrap">
+        @foreach($products as $product)
+            <div class="p-4 border rounded mb-4 me-4" style="width:500px;">
+                <h3 class="font-bold">{{ $product->name }}</h3>
+                <p>${{ number_format($product->price, 2) }}</p>
+
+                <livewire:add-to-cart-button :product="$product" :key="$product->id">
+
+                <a href="{{ route('checkout.show', $product) }}" class="mt-2 btn btn-secondary">Ver</a>
+            </div>
+        @endforeach
     </div>
 
     {{ $products->links() }}
 </div>
 
-
-{{-- <div>
-    <h2 class="text-xl font-bold mb-4">Productos</h2>
-
-    @foreach($products as $product)
-        <div class="p-3 border rounded mb-3">
-            <p>{{ $product->name }} - ${{ $product->price }}</p>
-
-            <button
-                class="btn btn-warning"
-                wire:click="buy({{ $product->id }})">
-                Comprar
-            </button>
-        </div>
-    @endforeach
-
-    <div id="walletBrick_container" class="mt-6"></div>
-</div>
-
-<script src="https://sdk.mercadopago.com/js/v2"></script>
-
+@push('scripts')
 <script>
-document.addEventListener('livewire:init', () => {
-    Livewire.on('request-preference', async ({ productId }) => {
-
-        const response = await fetch(`/checkout/preference/${productId}`, {
-            method: "POST",
-            headers: {
-                "X-CSRF-TOKEN": "{{ csrf_token() }}",
-                "Content-Type": "application/json"
-            }
-        });
-
-        const data = await response.json();
-        const preferenceId = data.id;
-
-        const mp = new MercadoPago("{{ config('services.mp.public_key') }}");
-
-        const bricksBuilder = mp.bricks();
-
-        await bricksBuilder.create("wallet", "walletBrick_container", {
-            initialization: {
-                preferenceId: preferenceId,
-            },
-        });
-
+    Livewire.on('notify', (data) => {
+        const {id, message} = data[0];
+        console.log(id, message);
     });
-});
-</script> --}}
+</script>
+@endpush
