@@ -27,6 +27,9 @@ class CartComponent extends Component
 
     public function updateQty($id, $qty) {
         $item = \App\Models\CartItem::find($id);
+        if (empty($qty)) {
+            $qty = 1;
+        }
         if ($item && $qty > 0) {
             $item->update(['quantity' => (int)$qty]);
         }

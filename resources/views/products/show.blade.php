@@ -14,7 +14,7 @@
 
                 <a href="{{ $product->meli_url ?? '#' }}" target="_blank"
                 class="btn btn-block btn-warning fw-semibold float-end mt-5">
-                    Ver en Mercado Libre
+                    Ver en Mercado Pago
                 </a>
             </div>
         </div>

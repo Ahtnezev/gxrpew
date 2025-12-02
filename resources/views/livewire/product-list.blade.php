@@ -1,5 +1,7 @@
 <div>
-    <a  href="{{ route('cart.index') }}" class="btn btn-success">Carrito</a>
+    <a  href="{{ route('cart.index') }}" class="btn btn-warning">
+        <i class="fa-solid fa-cart-shopping"></i> Carrito
+    </a>
 
     <div class="mt-4 container d-flex align-items-center justify-content-start flex-wrap">
         @foreach($products as $product)
@@ -7,9 +9,13 @@
                 <h3 class="font-bold">{{ $product->name }}</h3>
                 <p>${{ number_format($product->price, 2) }}</p>
 
-                <livewire:add-to-cart-button :product="$product" :key="$product->id">
+                <div class="d-flex align-items-center justify-content-between">
+                    <livewire:add-to-cart-button :product="$product" :key="$product->id">
 
-                <a href="{{ route('checkout.show', $product) }}" class="mt-2 btn btn-secondary">Ver</a>
+                    <a href="{{ route('checkout.show', $product) }}" class="mt-2 btn btn-primary">
+                        <i class="fa-solid fa-circle-info"></i> Ver
+                    </a>
+                </div>
             </div>
         @endforeach
     </div>

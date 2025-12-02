@@ -26,10 +26,6 @@ class Checkout extends Component
         }
     }
 
-    public function updatedInitPoint() {
-
-    }
-
     public function createOrderAndPreference()
     {
         $total = $this->cart->items->sum(fn($i)=> $i->unit_price * $i->quantity);
