@@ -48,7 +48,7 @@ class MercadoPagoWebhookController extends Controller
                 return false;
             }
 
-            $accessToken = config('services.mp.access_token');
+            $accessToken = config('services.mp.webhooks_access_token');
 
             if (!$accessToken) {
                 Log::channel('mp')->error('Access token de MercadoPago no configurado');
