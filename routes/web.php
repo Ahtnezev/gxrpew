@@ -6,7 +6,7 @@ use App\Livewire\Checkout;
 
 
 Route::get('/', App\Livewire\ProductList::class)
-    ->name('products.index');
+    ->name('home');
 
 Route::get('/cart', fn() => view('cart'))
     ->name('cart.index');

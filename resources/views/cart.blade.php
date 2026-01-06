@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="mb-4">
-    <a href="{{ route("products.index") }}" class="btn btn-primary">
+    <a href="{{ route("home") }}" class="btn btn-primary">
         <i class="fa-solid fa-chevron-left"></i> Regresar
     </a>
 </div>

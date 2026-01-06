@@ -7,7 +7,7 @@
         @foreach($products as $key => $product)
             <div class="p-4 border mb-4 shadow-sm me-4 card-product">
                 <a href="{{ route('checkout.show', $product) }}">
-                    <img src="{{ App\Helpers\RandomImageHelper::getRandomImagePath() }}" class="img-fluid" alt="Nike Product">
+                    <img loading="lazy" src="{{ App\Helpers\RandomImageHelper::getRandomImagePath() }}" class="img-fluid" alt="Nike Product">
                 </a>
 
                 <p>
