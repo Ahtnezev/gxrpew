@@ -2,14 +2,14 @@
     <div class="row">
         <div class="col-12 col-lg-9 mx-start">
             @if($cart && $cart->items->count())
-            <table class="table table-sm table-hover table-dark">
+            <table class="table table-hover">
                 <thead><tr><th>Producto</th><th>Cant</th><th>Precio</th><th></th></tr></thead>
                 <tbody>
                 @foreach($cart->items as $item)
                     <tr>
                         <td><em class="text-secondary">{{ $item->product->name }}</em></td>
                         <td>
-                            <input class="form-control form-control-sm bg-secondary" type="number" value="{{ $item->quantity }}" min="1" wire:change="updateQty({{ $item->id }}, $event.target.value)" />
+                            <input class="form-control form-control-sm" type="number" value="{{ $item->quantity }}" min="1" wire:change="updateQty({{ $item->id }}, $event.target.value)" />
                         </td>
                         <td>${{ number_format($item->unit_price * $item->quantity,2) }}</td>
                         <td><button class="btn btn-sm btn-outline-danger" wire:click="removeItem({{ $item->id }})">Eliminar</button></td>
@@ -25,7 +25,7 @@
             </div>
 
             <a href="{{ route('checkout.cart') }}" class="btn btn-success">
-                <i class="fa-solid fa-dollar-sign"></i> Ir a pagar
+                <i class="fa-solid fa-dollar-sign"></i>Ir a pagar
             </a>
         @else
             <p>Tu carrito está vacío.</p>

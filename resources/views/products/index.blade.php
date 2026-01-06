@@ -14,9 +14,6 @@
                 <div class="card-body">
                     <p class="text-secondary">{{ Str::limit($product->description, 80) }}</p>
                     <p class="text-primary fw-semibold mt-2">${{ number_format($product->price, 2) }}</p>
-                    {{-- <a href="{{ route('products.show', $product) }}" class="btn btn-success float-end">
-                        Ver
-                    </a> --}}
                 </div>
             </div>
         @endforeach

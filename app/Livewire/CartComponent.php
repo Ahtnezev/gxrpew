@@ -5,6 +5,8 @@ namespace App\Livewire;
 use App\Models\Cart;
 use Livewire\Component;
 
+use function Laravel\Prompts\info;
+
 class CartComponent extends Component
 {
     public $cart;

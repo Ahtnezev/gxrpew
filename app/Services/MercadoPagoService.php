@@ -2,23 +2,50 @@
 
 namespace App\Services;
 
+use App\Models\Cart;
+use App\Models\CartItem;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-use MercadoPago\Client\Preference\PreferenceClient;
-use MercadoPago\MercadoPagoConfig;
 
 class MercadoPagoService
 {
     protected $secretKey;
+    protected $url = "https://api.mercadopago.com/checkout/preferences";
 
     public function __construct()
     {
         $this->secretKey = config('services.mp.access_token');
     }
 
+    /**
+     *
+    */
+    public static function addToCart(Product $product, String $sessionKey, int $qty): CartItem|Cart
+    {
+        $cart = Cart::firstOrCreate(
+            ['session_key' => $sessionKey],
+            ['user_id' => Auth::id()]
+        );
+
+        $item = $cart->items()->where('product_id', $product->id)->first();
+
+        if ($item) {
+            $item->increment('quantity', $qty);
+            return $item;
+        } else {
+            $cart->items()->create([
+                'product_id' => $product->id,
+                'quantity'   => $qty,
+                'unit_price' => $product->price,
+            ]);
+            return $cart;
+        }
+    }
+
+
     public function createPreference($product)
     {
-        $url = "https://api.mercadopago.com/checkout/preferences";
-
         $payload = [
             "items" => [
                 [
@@ -29,13 +56,13 @@ class MercadoPagoService
                 ]
             ],
             "back_urls" => [
-                "success" => route('checkout.success'),
-                "failure" => route('checkout.failure'),
+                "success" => route('payment.success'),
+                "failure" => route('payment.failure'),
             ]
         ];
 
         $response = Http::withToken($this->secretKey)
-            ->post($url, $payload);
+            ->post($this->url, $payload);
 
         return $response->json();
 

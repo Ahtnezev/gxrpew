@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Helpers\MercadoPagoHelper;
 use App\Models\Product;
+use App\Services\MercadoPagoService;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use SweetAlert2\Laravel\Traits\WithSweetAlert;
@@ -24,10 +24,18 @@ class AddToCartButton extends Component
         $sessionKey = session()->get('cart_session_key', Str::uuid()->toString());
         session(['cart_session_key' => $sessionKey]);
 
-        MercadoPagoHelper::addToCart($product, $sessionKey, $qty);
+        MercadoPagoService::addToCart($product, $sessionKey, $qty);
 
         $this->dispatch('cart-component', 'cartUpdated'); // notificar al componente cart: CartComponent
-        $this->dispatch('notify', ['id' => $product->id, 'message' => 'Producto añadido']);
+        // $this->dispatch('notify', ['id' => $product->id, 'message' => 'Producto añadido']);
+        $this->swalToast([
+            'title' => 'Producto añadido al carrito',
+            'text' => Str::limit($product->name, 15, '...'),
+            'position' => 'top-end',
+            'icon' => 'success',
+            'showConfirmButton' => false,
+            'timer' => 2000,
+        ]);
         if ($this->isRedirect) {
             return redirect()->route('cart.index');
         }
