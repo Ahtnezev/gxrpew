@@ -57,7 +57,7 @@
     }
     @media screen and (min-width: 992px) {
         .card-product {
-            width: calc(100% / 2.3);
+            width: calc(100% / 3.2);
         }
     }
 </style>

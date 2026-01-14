@@ -9,7 +9,13 @@
                     <tr>
                         <td><em class="text-secondary">{{ $item->product->name }}</em></td>
                         <td>
-                            <input class="form-control form-control-sm" type="number" value="{{ $item->quantity }}" min="1" wire:change="updateQty({{ $item->id }}, $event.target.value)" />
+                            <input
+                                class="form-control form-control-sm"
+                                type="number"
+                                value="{{ $item->quantity }}"
+                                min="1"
+                                wire:change="updateQty({{ $item->id }}, $event.target.value)"
+                            />
                         </td>
                         <td>${{ number_format($item->unit_price * $item->quantity,2) }}</td>
                         <td><button class="btn btn-sm btn-outline-danger" wire:click="removeItem({{ $item->id }})">Eliminar</button></td>

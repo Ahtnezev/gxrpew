@@ -93,10 +93,5 @@ class Checkout extends Component
     public function render()
     {
         return view("livewire.checkout");
-        // return view('livewire.checkout', [
-        //     'cart' => $this->cart,
-        //     'order' => $this->order,
-        //     'initPoint' => $this->initPoint
-        // ]);
     }
 }
