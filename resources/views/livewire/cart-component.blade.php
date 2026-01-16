@@ -18,7 +18,7 @@
                             />
                         </td>
                         <td>${{ number_format($item->unit_price * $item->quantity,2) }}</td>
-                        <td><button class="btn btn-sm btn-outline-danger" wire:click="removeItem({{ $item->id }})">Eliminar</button></td>
+                        <td><button class="btn btn-sm btn-outline-danger" onclick="showSw({{ $item->id }})">Eliminar</button></td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -33,9 +33,35 @@
             <a href="{{ route('checkout.cart') }}" class="btn btn-success">
                 <i class="fa-solid fa-dollar-sign"></i>Ir a pagar
             </a>
-        @else
-            <p>Tu carrito está vacío.</p>
-        @endif
         </div>
+        @else
+            <div class="col-12">
+                <p>Tu carrito está vacío.</p>
+            </div>
+        @endif
     </div>
 </div>
+
+@push('scripts')
+<script>
+    function showSw(id) {
+        Swal.fire({
+            text: "¿Eliminar del carrito?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, eliminar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                @this.removeItem(id).then(() => {
+                    Swal.fire({
+                        text: "Eliminado",
+                        icon: "success"
+                    });
+                });
+            }
+        });
+    }
+</script>
+@endpush
