@@ -10,7 +10,7 @@
     @stack('styles')
     @livewireStyles
 </head>
-<body class="">
+<body>
     @include('components.navbar')
 
     <main class="container mx-auto py-4" style="height:calc(100vh - 50px);">
